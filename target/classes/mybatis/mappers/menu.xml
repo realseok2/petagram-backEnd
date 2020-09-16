@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="menu">
+
+	<!-- 메뉴조회하기. -->
+	<select id="menuSelect" parameterType="int" 
+		resultType="com.javaex.vo.MenuVo">
+		<![CDATA[			
+			select  menuNo,
+					shopNo,
+					menuTitle,
+			        display
+			from 	menu
+			where	shopNo=#{shopNo}
+		]]>
+	</select>
+	
+	<!-- 노출설정하기. -->
+	<update id="displayUpdate" parameterType="com.javaex.vo.MenuVo" >
+			<![CDATA[			
+				Update	menu
+				set display = #{display}	
+				where	menuNo = #{menuNo}
+			]]>
+	</update>
+	
+</mapper>

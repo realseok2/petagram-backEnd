@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="store">
+
+	<!-- 매장조회하기. -->
+	<select id="selectOne" parameterType="String" 
+		resultType="com.javaex.vo.ShopVo">
+		<![CDATA[			
+			select  shopNo,
+					shopNumber,
+					shopDomain,
+			        shopAddress,
+			        shopTitle,
+			        shopAuth,
+			        shopEmail,
+			        shopLogo,
+			        shopDesc,
+			        shopHeader
+			from 	shop
+			where	shopDomain=#{shopDomain}
+		]]>
+	</select>
+	
+	<!-- 매장조회리스트.  -->
+	<select id="list" parameterType="String" 
+		resultType="com.javaex.vo.ShopVo">
+		<![CDATA[			
+			select  shopNo,
+					shopNumber,
+			        shopAddress,
+			        shopTitle,
+			        shopDomain
+			from 	shop
+		]]>
+	</select>
+	
+	<!-- 매장정보 업데이트. -->
+	<update id="update" parameterType="com.javaex.vo.ShopVo">
+		<![CDATA[			
+			UPDATE shop
+			SET
+			    shopTitle 	= 	#{shopTitle},
+			    shopDesc    =	#{shopDesc},
+			    shopLogo    =	#{shopLogo},
+			    shopHeader  =	#{shopHeader},
+			    shopAddress = 	#{shopAddress},
+			    shopAuth    =  	#{shopAuth},
+			    shopNumber  =   #{shopNumber},
+			    shopEmail   =   #{shopEmail}
+			WHERE
+			    shopDomain 	= 	#{shopDomain}
+		]]>
+	</update>
+</mapper>

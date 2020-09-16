@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reservation">
+
+	<insert id="insertres" parameterType="com.javaex.vo.ReservationVo">
+	<![CDATA[
+		insert into reservation values(
+							seq_reservation_no.NEXTVAL,
+							#{dogno},
+							#{shopno},
+							#{userno},
+							#{username},
+							#{regdate},
+							#{usercontact},
+							#{reserved})
+	]]>
+	</insert>
+	
+	<!-- 예약현황리스트 -->
+	<select id="getRList" parameterType="int" resultType="com.javaex.vo.ReservationVo">
+	<![CDATA[
+			select regno,
+				   username,
+				   regdate
+			from   reservation
+			where	shopNo = #{shopNo}
+	]]>
+	</select>
+	
+	<!-- 방문내역리스트 -->
+	<select id="getrList" parameterType="int" resultType="com.javaex.vo.VisitVo">
+	<![CDATA[
+			select d.dogname, s.shoptitle, r.regdate, d.dogweight
+			from reservation r, dog d, shop s
+			where d.userno = r.userno
+			and s.shopno = r.shopno
+			and r.userno = #{userNo}
+			order by regdate desc 
+	]]>
+	</select>
+	
+</mapper>
